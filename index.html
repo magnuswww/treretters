@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Treretters – lørdag 31. oktober</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#3a1f2b; --paper:#f4e6e2; --ink:#4a1621; --ink-soft:#7a4a52;
+  --gold:#a8823c; --rule:#c9a9a6; --field:#fffaf8; --ok:#3f6b4a;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1d1016; --paper:#2c1820; --ink:#f1dcd8; --ink-soft:#c3a2a4;
+    --gold:#d2ab62; --rule:#5c3a44; --field:#3a222b; --ok:#8fc39c;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1d1016; --paper:#2c1820; --ink:#f1dcd8; --ink-soft:#c3a2a4;
+  --gold:#d2ab62; --rule:#5c3a44; --field:#3a222b; --ok:#8fc39c;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Karla",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16px; line-height:1.5;
+  padding:clamp(16px,5vw,56px) 14px;
+}
+.card{
+  max-width:560px; margin:0 auto; background:var(--paper);
+  padding:clamp(28px,7vw,56px) clamp(22px,6vw,52px);
+  outline:1px solid var(--rule); outline-offset:-10px;
+  box-shadow:0 0 0 4px var(--paper), 0 0 0 5px var(--rule);
+  text-align:center;
+}
+.serif{font-family:"Cormorant Garamond","Iowan Old Style",Georgia,serif}
+.kicker{font-size:.95rem; color:var(--ink-soft); margin:0}
+h1{
+  font-family:"Cormorant Garamond","Iowan Old Style",Georgia,serif;
+  font-style:italic; font-weight:500;
+  font-size:clamp(3.2rem,15vw,5.6rem); line-height:.9;
+  margin:.15em 0 .1em; letter-spacing:-.01em;
+}
+.date{font-family:"Cormorant Garamond",Georgia,serif; font-size:1.35rem; margin:0}
+.intro{color:var(--ink-soft); max-width:34ch; margin:1.2rem auto 0; font-size:.98rem}
+.orn{display:block; margin:1.8rem auto; width:90px; height:12px; color:var(--gold)}
+
+.course{padding:1.6rem 0; border-top:1px solid var(--rule)}
+.course:first-of-type{border-top:0}
+.course h2{
+  font-family:"Cormorant Garamond",Georgia,serif; font-weight:600;
+  font-size:1.05rem; letter-spacing:.04em; margin:0 0 .6rem; color:var(--gold);
+}
+.riddle{
+  font-family:"Cormorant Garamond",Georgia,serif; font-size:1.3rem; line-height:1.45;
+  margin:0 auto; max-width:30ch;
+}
+form{display:flex; gap:8px; justify-content:center; margin-top:1.1rem; flex-wrap:wrap}
+input{
+  font:inherit; color:var(--ink); background:var(--field);
+  border:1px solid var(--rule); padding:.6rem .8rem; width:12rem; max-width:100%;
+  text-align:center; border-radius:2px;
+}
+button{
+  font:inherit; font-weight:600; cursor:pointer; border-radius:2px;
+  padding:.6rem 1.1rem; border:1px solid var(--ink); background:var(--ink); color:var(--paper);
+}
+button.link{background:none; border:0; color:var(--ink-soft); font-weight:400; text-decoration:underline; padding:.4rem; font-size:.9rem}
+:focus-visible{outline:2px solid var(--gold); outline-offset:2px}
+.msg{min-height:1.5em; margin:.5rem 0 0; font-size:.92rem; color:var(--ink-soft)}
+.hint{font-style:italic; color:var(--ink-soft); margin:.3rem 0 0; font-size:.95rem}
+.dish{
+  font-family:"Cormorant Garamond",Georgia,serif; font-style:italic;
+  font-size:2.2rem; color:var(--gold); margin:.8rem 0 0; line-height:1.1;
+}
+.served-note{font-size:.88rem; color:var(--ok); margin:.2rem 0 0}
+.locked .riddle,.locked h2{opacity:.4}
+.locked .wait{font-size:.9rem; color:var(--ink-soft); margin:.6rem 0 0; font-style:italic}
+
+.bill{border-top:1px solid var(--rule); padding-top:1.8rem; margin-top:.4rem}
+.bill .sum{font-family:"Cormorant Garamond",Georgia,serif; font-size:1.5rem; margin:0}
+.count{font-family:"Cormorant Garamond",Georgia,serif; font-size:2.4rem; color:var(--gold); margin:.4rem 0 0; font-variant-numeric:tabular-nums}
+.reveal h3{
+  font-family:"Cormorant Garamond",Georgia,serif; font-style:italic; font-weight:500;
+  font-size:2rem; margin:.4rem 0; line-height:1.1;
+}
+.reveal p{margin:.4rem auto; max-width:36ch}
+.reveal.on{animation:plate .9s ease-out}
+@keyframes plate{from{opacity:0; transform:scale(.97)}to{opacity:1; transform:none}}
+@media (prefers-reduced-motion:reduce){.reveal.on{animation:none}}
+
+.practical{border-top:1px solid var(--rule); margin-top:1.8rem; padding-top:1.4rem; font-size:.95rem}
+.practical dl{display:grid; grid-template-columns:auto 1fr; gap:.35rem 1rem; text-align:left; max-width:340px; margin:0 auto}
+.practical dt{color:var(--ink-soft)}
+.practical dd{margin:0}
+.sign{font-family:"Cormorant Garamond",Georgia,serif; font-style:italic; font-size:1.3rem; margin:1.6rem 0 0}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main class="card">
+  <p class="kicker">Bord for to</p>
+  <h1>Treretters</h1>
+  <p class="date">lørdag 31. oktober</p>
+  <p class="intro">Du er booket. Hva, hvor og hvem får du ikke vite ennå – men løser du rettene, får du noen hint.</p>
+
+  <svg class="orn" viewBox="0 0 90 12" aria-hidden="true"><path d="M0 6h36M54 6h36" stroke="currentColor" stroke-width="1"/><path d="M45 1l5 5-5 5-5-5z" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+
+  <div id="courses"></div>
+
+  <section class="bill" id="bill" hidden>
+    <p class="sum">Latter. Scene. Tre.</p>
+    <div id="waiting">
+      <p class="msg">Har du gjettet det? Fasiten serveres lørdag kl. 18.00.</p>
+      <p class="count" id="count" aria-live="polite"></p>
+    </div>
+    <div class="reveal" id="reveal" hidden></div>
+  </section>
+
+  <section class="practical">
+    <dl>
+      <dt>Vær klar</dt><dd>kl. 18.15</dd>
+      <dt>Antrekk</dt><dd>Pent, men komfortabelt</dd>
+      <dt>Kostyme</dt><dd>Ja, det er Halloween. Nei.</dd>
+    </dl>
+    <p class="sign">– M.</p>
+  </section>
+</main>
+
+<script>
+(function(){
+  var COURSES = [
+    { name:"Forrett",
+      riddle:"Jeg kan deles uten å bli mindre, smitter uten å gjøre deg syk, og kommer ofte når du minst venter det.",
+      answers:["latter","latteren","le","ler","å le"],
+      hint:"Du gjør det når noe er morsomt.",
+      dish:"Latter" },
+    { name:"Hovedrett",
+      riddle:"Jeg står i lyset mens alle andre sitter i mørket. Alle ser på meg, men selv ser jeg ingen.",
+      answers:["scene","scenen","en scene"],
+      hint:"Teater, konsert, standup – alle trenger meg.",
+      dish:"Scene" },
+    { name:"Dessert",
+      riddle:"Legg meg til meg selv, og jeg blir seks. Gang meg med meg selv, og jeg blir ni.",
+      answers:["tre","3"],
+      hint:"Tell rettene på denne menyen.",
+      dish:"Tre" }
+  ];
+  var KEY = "treretters-solved";
+  var UNLOCK = new Date("2026-10-31T18:00:00+01:00");
+  var REVEAL = "PHA+RmFzaXRlbjo8L3A+PGgzPlRyZXJldHRlcnM8L2gzPjxwPktldmluIFbDpWdlbmVzLCBDZXNzIG9nIFJhc211cyBXb2xkIOKAkyBmw7hyc3RlIGdhbmcgZGUgdHJlIHN0w6VyIHDDpSBzYW1tZSBzY2VuZS48L3A+PHA+T2xhdnNoYWxsZW4sIFN0b3JlIHNhbC4gRMO4cmVuZSDDpXBuZXIgMTguNDAsIHNob3dldCBzdGFydGVyIDE5LjAwLjwvcD48cD5TZSwgamVnIGxvdmV0IGFsZHJpIG1hdC48L3A+";
+
+  var solved = 0;
+  try { solved = parseInt(localStorage.getItem(KEY),10) || 0; } catch(e){}
+  solved = Math.max(0, Math.min(3, solved));
+
+  function norm(s){ return s.toLowerCase().trim().replace(/[.!?,«»"“”]/g,"").replace(/\s+/g," "); }
+  function save(){ try { localStorage.setItem(KEY, String(solved)); } catch(e){} }
+
+  var wrap = document.getElementById("courses");
+  var WRONG = ["Ikke helt. Kokken rister på hodet.","Nesten? Prøv igjen.","Sendt tilbake til kjøkkenet."];
+  var wrongN = 0;
+
+  function render(){
+    wrap.innerHTML = "";
+    COURSES.forEach(function(c,i){
+      var s = document.createElement("section");
+      s.className = "course" + (i > solved ? " locked" : "");
+      var h = '<h2>' + c.name + '</h2><p class="riddle">' + c.riddle + '</p>';
+      if (i < solved) {
+        h += '<p class="dish">' + c.dish + '</p><p class="served-note">Servert</p>';
+      } else if (i === solved) {
+        h += '<form novalidate><label for="a'+i+'" class="msg" style="display:block;margin:0 0 .3rem">Ditt svar</label>'
+           + '<input id="a'+i+'" autocomplete="off" autocapitalize="off" spellcheck="false">'
+           + '<button type="submit">Server</button></form>'
+           + '<p class="msg" aria-live="polite"></p>'
+           + '<button type="button" class="link">Trenger du et hint?</button>';
+      } else {
+        h += '<p class="wait">Serveres når forrige rett er løst.</p>';
+      }
+      s.innerHTML = h;
+      wrap.appendChild(s);
+
+      if (i === solved) {
+        var form = s.querySelector("form"), input = s.querySelector("input"),
+            msg = s.querySelectorAll(".msg")[1], hintBtn = s.querySelector(".link");
+        form.addEventListener("submit", function(ev){
+          ev.preventDefault();
+          if (c.answers.indexOf(norm(input.value)) > -1) {
+            solved++; save(); render(); update();
+            var next = wrap.children[Math.min(solved, 2)];
+            if (solved < 3 && next) { var ni = next.querySelector("input"); if (ni) ni.focus(); }
+            else document.getElementById("bill").scrollIntoView({behavior:"smooth",block:"center"});
+          } else {
+            msg.textContent = WRONG[wrongN++ % WRONG.length];
+          }
+        });
+        hintBtn.addEventListener("click", function(){
+          var p = document.createElement("p"); p.className = "hint"; p.textContent = c.hint;
+          hintBtn.replaceWith(p);
+        });
+      }
+    });
+  }
+
+  function decode(b){ return decodeURIComponent(escape(atob(b))); }
+
+  function update(){
+    var bill = document.getElementById("bill");
+    bill.hidden = solved < 3;
+    if (solved < 3) return;
+    var now = new Date(), preview = location.hash === "#forhandsvisning";
+    var wait = document.getElementById("waiting"), rev = document.getElementById("reveal");
+    if (now >= UNLOCK || preview) {
+      if (rev.hidden) { rev.innerHTML = decode(REVEAL); rev.hidden = false; rev.classList.add("on"); }
+      wait.hidden = true;
+      return;
+    }
+    var d = UNLOCK - now, days = Math.floor(d/864e5), h = Math.floor(d%864e5/36e5),
+        m = Math.floor(d%36e5/6e4), sec = Math.floor(d%6e4/1e3);
+    var pad = function(n){ return n < 10 ? "0"+n : n; };
+    document.getElementById("count").textContent =
+      (days ? days + (days === 1 ? " dag " : " dager ") : "") + pad(h) + ":" + pad(m) + ":" + pad(sec);
+  }
+
+  render(); update();
+  setInterval(update, 1000);
+  window.addEventListener("hashchange", update);
+})();
+</script>
+</body>
+</html>
